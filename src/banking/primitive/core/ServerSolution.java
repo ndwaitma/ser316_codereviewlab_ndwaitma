@@ -45,8 +45,10 @@ class ServerSolution implements AccountServer {
 		}
 	}
 	
-	private boolean newAccountFactory(String type, String name, float balance)
+	private boolean accountFact(String type, String name, float balance)
 		throws IllegalArgumentException {
+		
+		if (balance < 0.0f) throw new IllegalArgumentException("New account may not be started with a negative balance");
 		
 		if (accountMap.get(name) != null) return false;
 		
@@ -73,7 +75,7 @@ class ServerSolution implements AccountServer {
 		
 		if (balance < 0.0f) throw new IllegalArgumentException("New account may not be started with a negative balance");
 		
-		return newAccountFactory(type, name, balance);
+		return accountFact(type, name, balance);
 	}
 	
 	public boolean closeAccount(String name) {
